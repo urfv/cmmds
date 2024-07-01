@@ -18,7 +18,7 @@ JIRA_TOKEN = "" # ваш токен авторизации
 jira = Jira(url=JIRA_INSTANCE_URL, token=JIRA_TOKEN)
 
 # фильтры
-components = ["promo", "promo-federal"] # компонент для выгрузки
+components = ["promo", "promo-federal"] # компоненты для выгрузки
 categories = ["Процедуры", "Седина", "Мозги"]
 severities = ["XS", "S", "M", "L", "XL"]
 
@@ -33,7 +33,7 @@ with open('output.csv', 'w', newline='') as csvfile:
         row_data = [f'Week {week_number + 33}']
         for category in categories:
             for severity in severities:
-                base_jql = f'project in ("CommDes") AND component IN ({components}) AND "Категория" = "{category}" AND Severity = "{severity}"'
+                base_jql = f'project in ("CMMDS") AND component IN ({components}) AND "Категория" = "{category}" AND Severity = "{severity}"'
                 jql_query = f"{base_jql} AND resolved >= startOfWeek({week_number}w) and resolved <= endOfWeek({week_number}w)"
                 resolved_issues_result = jira.jql(jql_query)
                 resolved_issues = resolved_issues_result.get('total', 0)
